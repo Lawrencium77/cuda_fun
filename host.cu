@@ -22,7 +22,7 @@ float add_wrapper(int N)
   cudaMemcpy(d_x, x, N * sizeof(float), cudaMemcpyHostToDevice);
   cudaMemcpy(d_y, y, N * sizeof(float), cudaMemcpyHostToDevice);
 
-  // Perform SAXPY on 1M elements
+  // Execute the kernel
   add<<<1, 1>>>(N, d_x, d_y, d_out);
 
   cudaMemcpy(out, d_out, N * sizeof(float), cudaMemcpyDeviceToHost);
