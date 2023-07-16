@@ -1,3 +1,4 @@
+// This file is used to test the behaviour of the Tensor1D class.
 #include <iostream>
 #include "Tensor1D.h"
 
