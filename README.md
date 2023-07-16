@@ -2,9 +2,10 @@
 
 Current status:
 
-1. From `./`, running
+1. Running
 
 ```
+cd cuda/
 nvcc -O3 -I/usr/include/python3.8 -Xcompiler -fPIC -shared -o example.so add.cu host.cu -lpython3.8
 ```
 
@@ -18,7 +19,7 @@ Error is 0.0
 
 ```
 cd tensors/
-g++ -O3 -Wall -shared -std=c++14 -fPIC `python3 -m pybind11 --includes` pybind.cpp -o Tensor1D`python3-config --extension-suffix`
+g++ -O3 -Wall -shared -std=c++14 -fPIC `python3 -m pybind11 --includes` python_export.cpp -o Tensor1D`python3-config --extension-suffix`
 ```
 
 will compile a shared object which allows you to run:
