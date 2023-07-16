@@ -8,7 +8,7 @@ Current status:
 nvcc -O3 -I/usr/include/python3.8 -Xcompiler -fPIC -shared -o example.so add.cu host.cu -lpython3.8
 ```
 
-compile a shared object.  Running `export CUDA_VISIBLE_DEVICES=0` and then `python3 example.py` will run an example CUDA kernel, that adds two tensors together on GPU. If running correctly, the program will print to stdout:
+compiles a shared object.  Running `export CUDA_VISIBLE_DEVICES=0` and then `python3 example.py` will run an example CUDA kernel, that adds two tensors together on GPU. If running correctly, the program will print to stdout:
 
 ```
 Error is 0.0
