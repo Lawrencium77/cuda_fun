@@ -10,12 +10,15 @@ private:
 
 public:
     // Constructor
-    Tensor1D(int size);
+    Tensor1D(int size, bool zeros = true);
+
+    // Set data to zeros
+    void zero();
 
     // Get size
     int getSize();
 
-    // Set value 
+    // Set value
     void set_value(int index, T value);
 
     // Overload the [] operator
@@ -29,4 +32,4 @@ public:
 };
 
 #include "Tensor1D.tpp"
-#endif 
+#endif
