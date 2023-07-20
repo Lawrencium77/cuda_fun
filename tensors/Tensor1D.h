@@ -31,7 +31,7 @@ public:
     void show_data();
 
     // Delete data
-    void delete_data();
+    void clear();
 };
 
 #include "Tensor1D.tpp"

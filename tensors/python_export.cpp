@@ -20,5 +20,5 @@ PYBIND11_MODULE(Tensor1D, m)
          .def("__add__", [](Tensor1D<int> &t, int value)
               { return t + value; })
          .def("show_data", &Tensor1D<int>::show_data)
-         .def("delete_data", &Tensor1D<int>::delete_data);
+         .def("clear", &Tensor1D<int>::clear);
 }

@@ -64,7 +64,7 @@ void Tensor1D<T>::show_data()
 }
 
 template <typename T>
-void Tensor1D<T>::delete_data()
+void Tensor1D<T>::clear()
 {
     delete[] data;
     size = 0;
