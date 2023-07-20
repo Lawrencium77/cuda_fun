@@ -7,6 +7,7 @@ namespace py = pybind11;
 PYBIND11_MODULE(Tensor1D, m)
 {
      py::class_<Tensor1D<int>>(m, "Tensor1D")
+         .def(py::init<>())
          .def(py::init<int>())
          .def(py::init<int, bool>())
          .def("zero", &Tensor1D<int>::zero)
@@ -18,5 +19,6 @@ PYBIND11_MODULE(Tensor1D, m)
               { t.set_value(index, value); })
          .def("__add__", [](Tensor1D<int> &t, int value)
               { return t + value; })
+         .def("show_data", &Tensor1D<int>::show_data)
          .def("delete_data", &Tensor1D<int>::delete_data);
 }

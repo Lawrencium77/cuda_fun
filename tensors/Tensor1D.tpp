@@ -52,6 +52,18 @@ Tensor1D<T> &Tensor1D<T>::operator+(int value)
 }
 
 template <typename T>
+void Tensor1D<T>::show_data()
+{
+    std::cout << "Data: [";
+    if (size > 0)
+    {
+        std::copy(data, data + size - 1, std::ostream_iterator<T>(std::cout, ", "));
+        std::cout << data[size - 1];
+    }
+    std::cout << "]\n";
+}
+
+template <typename T>
 void Tensor1D<T>::delete_data()
 {
     delete[] data;

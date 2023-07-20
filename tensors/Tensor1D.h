@@ -10,7 +10,7 @@ private:
 
 public:
     // Constructor
-    Tensor1D(int size, bool zeros = true);
+    Tensor1D(int size = 0, bool zeros = true);
 
     // Set data to zeros
     void zero();
@@ -26,6 +26,9 @@ public:
 
     // Overload the + operator
     Tensor1D<T> &operator+(int value);
+
+    // Show data
+    void show_data();
 
     // Delete data
     void delete_data();
