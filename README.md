@@ -1,32 +1,10 @@
-# cuda_fun
+## Overview
 
-Current status:
+**Status**: In progress.
 
-1. Running
+`csrc/` contains source code for tensor processing library, written in C++.
+`python_neural_net` contains a super basic neural network written in Python, using only NumPy. The aim is to replace NumPy with the C++ library once it is complete.
 
-```
-cd cuda/
-nvcc -O3 -I/usr/include/python3.8 -Xcompiler -fPIC -shared -o example.so add.cu host.cu -lpython3.8
-```
+### Build Process
 
-compiles a shared object.  Running `export CUDA_VISIBLE_DEVICES=0` and then `python3 example.py` will run an example CUDA kernel, that adds two tensors together on GPU. If running correctly, the program will print to stdout:
-
-```
-Error is 0.0
-```
-
-2. Running
-
-```
-cd tensors/
-g++ -O3 -Wall -shared -std=c++14 -fPIC `python3 -m pybind11 --includes` python_export.cpp -o Tensor1D`python3-config --extension-suffix`
-```
-
-will compile a shared object which allows you to run:
-
-```python
-from Tensor1D import Tensor1D
-tensor = Tensor1D(5)
-```
-
-This `Tensor1D` object supports a few basic operations.
+Simply run `make all`. This will compile a shared object file and put it into `build/`.
