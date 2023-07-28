@@ -4,34 +4,16 @@
 template <typename T>
 class Tensor
 {
-private:
-    T *data;
-    int size;
-
 public:
+    // Attributes
+    std::vector<T> data;
+    std::vector<int> shape;
+    std::vector<int> strides;
+    int size;
+    int ndim;
+
     // Constructor
-    Tensor(int size = 0, bool zeros = true);
-
-    // Set data to zeros
-    void zero();
-
-    // Get size
-    int getSize();
-
-    // Set value
-    void set_value(int index, T value);
-
-    // Overload the [] operator
-    T &operator[](int index);
-
-    // Overload the + operator
-    Tensor<T> &operator+(int value);
-
-    // Show data
-    void show_data();
-
-    // Delete data
-    void clear();
+    Tensor(std::vector<int> shape);
 };
 
 #include "Tensor.tpp"

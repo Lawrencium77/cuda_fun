@@ -1,71 +1,26 @@
 #include <iostream>
 
 template <typename T>
-Tensor<T>::Tensor(int size, bool zeros) : size(size)
+Tensor<T>::Tensor(std::vector<int> shape_) : shape(std::move(shape_))
 {
-    data = new T[size];
-    if (zeros)
+    // Get size
+    size = 1;
+    for (int i = 0; i < shape.size(); i++)
     {
-        zero();
+        size *= shape[i];
     }
-}
 
-template <typename T>
-void Tensor<T>::zero()
-{
-    for (int i = 0; i < size; i++)
+    // Get ndim
+    ndim = shape.size();
+
+    // Get strides
+    strides = std::vector<int>(shape.size());
+    strides[shape.size() - 1] = 1;
+    for (int i = shape.size() - 2; i >= 0; i--)
     {
-        data[i] = 0;
+        strides[i] = strides[i + 1] * shape[i + 1];
     }
-}
 
-template <typename T>
-int Tensor<T>::getSize()
-{
-    return size;
-}
-
-template <typename T>
-void Tensor<T>::set_value(int index, T value)
-{
-    data[index] = value;
-}
-
-template <typename T>
-T &Tensor<T>::operator[](int index)
-{
-    if (index + 1 > size)
-    {
-        throw std::out_of_range("Index out of range");
-    }
-    return data[index];
-}
-
-template <typename T>
-Tensor<T> &Tensor<T>::operator+(int value)
-{
-    for (int i = 0; i < size; i++)
-    {
-        data[i] += value;
-    }
-    return *this;
-}
-
-template <typename T>
-void Tensor<T>::show_data()
-{
-    std::cout << "Data: [";
-    if (size > 0)
-    {
-        std::copy(data, data + size - 1, std::ostream_iterator<T>(std::cout, ", "));
-        std::cout << data[size - 1];
-    }
-    std::cout << "]\n";
-}
-
-template <typename T>
-void Tensor<T>::clear()
-{
-    delete[] data;
-    size = 0;
+    // Create storage
+    data = std::vector<T>(size);
 }
