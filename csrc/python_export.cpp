@@ -4,29 +4,24 @@
 
 namespace py = pybind11;
 
+template <typename T>
+void declare_class(py::module &m, const std::string &typestr)
+{
+    using Class = Tensor<T>;
+    std::string pyclass_name = "Tensor" + typestr;
+    py::class_<Class>(m, pyclass_name.c_str())
+        .def(py::init<const std::vector<int> &>())
+        .def_readwrite("data", &Class::data)
+        .def_readwrite("shape", &Class::shape)
+        .def_readwrite("strides", &Class::strides)
+        .def_readwrite("size", &Class::size)
+        .def_readwrite("ndim", &Class::ndim);
+}
+
 PYBIND11_MODULE(Tensor, m)
 {
-    py::class_<Tensor<int>>(m, "TensorInt")
-        .def(py::init<const std::vector<int> &>())
-        .def_readwrite("data", &Tensor<int>::data)
-        .def_readwrite("shape", &Tensor<int>::shape)
-        .def_readwrite("strides", &Tensor<int>::strides)
-        .def_readwrite("size", &Tensor<int>::size)
-        .def_readwrite("ndim", &Tensor<int>::ndim);
-
-    py::class_<Tensor<float>>(m, "TensorFloat")
-        .def(py::init<const std::vector<int> &>())
-        .def_readwrite("data", &Tensor<float>::data)
-        .def_readwrite("shape", &Tensor<float>::shape)
-        .def_readwrite("strides", &Tensor<float>::strides)
-        .def_readwrite("size", &Tensor<float>::size)
-        .def_readwrite("ndim", &Tensor<float>::ndim);
-
-    py::class_<Tensor<double>>(m, "TensorDouble")
-        .def(py::init<const std::vector<int> &>())
-        .def_readwrite("data", &Tensor<double>::data)
-        .def_readwrite("shape", &Tensor<double>::shape)
-        .def_readwrite("strides", &Tensor<double>::strides)
-        .def_readwrite("size", &Tensor<double>::size)
-        .def_readwrite("ndim", &Tensor<double>::ndim);
+    m.doc() = "Tensor class";
+    declare_class<int>(m, "Int");
+    declare_class<float>(m, "Float");
+    declare_class<double>(m, "Double");
 }
